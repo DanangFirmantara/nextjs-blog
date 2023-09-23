@@ -1,0 +1,33 @@
+.container {
+    height: 100vh;
+    width: '100%';
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    background-color: #D9E3DA;
+}
+
+.box {
+    width: 50vw;
+    height: 30vh;
+    background-color:#ECF1ED;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.containerContent {
+    width: '100%';
+    height: '100%';
+}
+
+.flex {
+    margin-right: 100px;
+    display: flex;
+}
+
+.font {
+    font-size: 15px;
+    flex: 1;
+}
