@@ -1,4 +1,4 @@
-import { Alert, Button, Grid, Input, Snackbar, TextField } from "@mui/material"
+import { Alert, Button, Box, Grid, Input, Snackbar, TextField } from "@mui/material"
 import styles from "./style.module.css"
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -14,8 +14,6 @@ const Index = () => {
     const [open, setOpen] = useState(false);
 
     const doLogin = () => {
-        console.log("do Login");
-        console.log(dataLogin, "datalogin");
         if (dataLogin.username === 'admin123' && dataLogin.password === 'admin123') {
             router.push('/');
         } else {
@@ -56,11 +54,21 @@ const Index = () => {
     return (
         <div className={styles.container}>
             <div className={styles.box}>
-                <div style={{ width: '100%' }}>
+                <Box
+                    style={{ width: '100%' }}
+                    autoComplete="off"
+                    noValidate
+                    onSubmit={doLogin}
+                >
                     <div style={{ marginBottom: '15px', margin: '10px' }}>
                         <div style={{ display: "flex", alignItems: "center", marginBottom: '15px' }}>
                             <div style={{ width: '100%' }}>
-                                <TextField type="text" name="username" fullWidth onChange={(e) => updateDataInput(e)} placeholder="Username" label="Username" />
+                                <TextField
+                                    type="text"
+                                    name="username"
+                                    fullWidth
+                                    onChange={(e) => updateDataInput(e)} placeholder="Username" label="Username"
+                                />
                             </div>
                         </div>
                         <div style={{ display: "flex", alignItems: "center" }}>
@@ -70,11 +78,11 @@ const Index = () => {
                         </div>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>
-                        <Button variant="contained" onClick={doLogin} fullWidth>
+                        <Button variant="contained" onClick={doLogin} fullWidth type="submit">
                             Login
                         </Button>
                     </div>
-                </div>
+                </Box>
             </div>
             <Snackbar
                 open={open}
@@ -87,31 +95,6 @@ const Index = () => {
                     Username Atau Password Salah!
                 </Alert>
             </Snackbar>
-
-            <div>
-                <style jsx global>{`
-                    html,
-                    body {
-                    padding: 0;
-                    margin: 0;
-                    font-family:
-                        -apple-system,
-                        BlinkMacSystemFont,
-                        Segoe UI,
-                        Roboto,
-                        Oxygen,
-                        Ubuntu,
-                        Cantarell,
-                        Fira Sans,
-                        Droid Sans,
-                        Helvetica Neue,
-                        sans-serif;
-                    }
-                    * {
-                    box-sizing: border-box;
-                    }
-                `}</style>
-            </div>
         </div >
     )
 }

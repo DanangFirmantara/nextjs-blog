@@ -7,7 +7,6 @@ export default function Home() {
   const router = useRouter()
 
   const goToLogin = () => {
-    console.log("go To Login Page");
     router.push("/login");
   }
 
@@ -23,12 +22,6 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-
-        <p className={styles.description}>
-          <Button variant='contained' onClick={goToLogin}>
-            Go To Page Login
-          </Button>
-        </p>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
