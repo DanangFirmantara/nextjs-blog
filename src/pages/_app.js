@@ -11,12 +11,11 @@ import { useRouter } from 'next/router';
 const MyApp = (props) => {
   const { Component, pageProps } = props;
   const router = useRouter();
-  const [ awaitLoading, setAwaitLoading ] = useState(true)
+  const [awaitLoading, setAwaitLoading] = useState(true)
 
-
-  useEffect(()=> {
+  useEffect(() => {
     const handleRouteChange = (url, { shallow }) => {
-      if(!shallow){
+      if (!shallow) {
         NProgress.start()
       }
     }
@@ -25,7 +24,7 @@ const MyApp = (props) => {
     router.events.on('routeChangeError', () => NProgress.done())
 
     // If the component is unmounted, unsubscribe
-		// from the event with the `off` method:
+    // from the event with the `off` method:
     return () => {
       router.events.off("routeChangeStart", handleRouteChange)
       router.events.off("routeChangeComplete", () => NProgress.done())
@@ -33,30 +32,38 @@ const MyApp = (props) => {
     }
   }, [])
 
-  useEffect(()=> {
+  useEffect(() => {
     setAwaitLoading(false);
   }, [])
 
-  return (
-    <Layout>
-      <Component {...pageProps} />
-      <Loading fullscreen isLoading={awaitLoading} />
-    </Layout>
-  )
+  const showLayout = (isLogin = false) => {
+    return (
+      <Layout isLogin={isLogin}>
+        <Component {...pageProps} router={router} />
+        <Loading fullscreen isLoading={awaitLoading} />
+      </Layout>
+    )
+  }
+
+  if (Component.getLayout) {
+    return Component.getLayout(showLayout(true))
+  }
+
+  return showLayout(false) 
 }
 
-MyApp.getInitialProps = async(context) => {
+MyApp.getInitialProps = async (context) => {
   const { ctx, Component } = context;
 
   let pageProps = {};
 
-  if(Component?.getInitialProps){
+  if (Component?.getInitialProps) {
     pageProps = await Component?.getInitialProps(ctx)
   }
 
   let layoutProps = {}
 
-  if(Component?.Layout){
+  if (Component?.Layout) {
     layoutProps = await Component?.Layout?.getInitialProps({
       ...ctx,
       pageProps: propsData
@@ -75,8 +82,8 @@ MyApp.getInitialProps = async(context) => {
   }
 }
 
-MyApp.propsTypes = {
-  Component : PropTypes.node,
+MyApp.propTypes = {
+  Component: PropTypes.node,
   pageProps: PropTypes.object
 }
 

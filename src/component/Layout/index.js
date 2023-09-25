@@ -4,15 +4,7 @@ import { useEffect, useState } from "react";
 import Navbar from "@/component/Layout/Navbar"
 
 const Index = (props) => {
-    const { children } = props;
-    const [showNav, setShowNav] = useState(false);
-    const router = useRouter();
-
-    useEffect(() => {
-        if (router.pathname !== '/login') {
-            setShowNav(true)
-        }
-    }, [router.pathname]);
+    const { children, isLogin = false } = props;
 
     return (
         <>
@@ -24,7 +16,7 @@ const Index = (props) => {
                     content="width=device-width, initial-scale=1, shrink-to-fit=no, height=device-height, user-scalable=0"
                 />
             </Head>
-            {showNav && (
+            {!isLogin && (
                 <Navbar />
             )}
             {children}

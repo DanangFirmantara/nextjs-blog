@@ -1,10 +1,10 @@
 
 import { Backdrop, CircularProgress } from '@mui/material';
-import PropsTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
-const propsTypes = {
-    fullscreen: PropsTypes.bool,
-    isLoading: PropsTypes.bool
+const propTypes = {
+    fullscreen: PropTypes.bool,
+    isLoading: PropTypes.bool
 }
 
 const defaultProps = {
@@ -29,7 +29,7 @@ const Index = (props) => {
     )
 }
 
-Index.propsTypes = propsTypes;
+Index.propTypes = propTypes;
 
 Index.defaultProps = defaultProps;
 
